@@ -48,7 +48,7 @@ public class AppointmentController implements Initializable {
     }
 
     public void bookAppointment(MouseEvent mouseEvent) {
-
+          setMessage("");
         if(date.getValue()==null){
             setMessage("ENTER APPOINTMENT DATE,DOCTOR,PATIENT NAME");
             return;
@@ -75,7 +75,7 @@ public class AppointmentController implements Initializable {
             int rowsAffected=statement.executeUpdate(query);
             if(rowsAffected>0){
                 setMessage("APPOINTMENT BOOKED SUCCESSFULLY");
-                fetchAllData();
+//                fetchAllData();
             }
             else{
                 setMessage("FAILED TO BOOK APPOINTMENT");
@@ -88,6 +88,7 @@ public class AppointmentController implements Initializable {
     }
 
     public void updateAppointment(MouseEvent mouseEvent) {
+        setMessage("");
         if(date.getValue()==null){
             setMessage("ENTER APPOINTMENT DATE,DOCTOR,PATIENT NAME");
             return;
@@ -115,7 +116,7 @@ public class AppointmentController implements Initializable {
             int rowsAffected=statement.executeUpdate(query);
             if(rowsAffected>0){
                 setMessage("APPOINTMENT UPDATED SUCCESSFULLY");
-                fetchAllData();
+//                fetchAllData();
             }
             else{
                 setMessage("FAILED TO UPDATE APPOINMENT");
@@ -128,8 +129,9 @@ public class AppointmentController implements Initializable {
     }
 
     public void deleteAppointment(MouseEvent mouseEvent) {
-
+        tableVIew.getItems().clear();
         String id_=id.getText();
+        setMessage("");
 
         if( id_.equals("")){
             setMessage("ENTER APPOINTMENT ID");
@@ -164,6 +166,7 @@ public class AppointmentController implements Initializable {
     public void getAppointmentDetails(MouseEvent mouseEvent) {
         String id_=id.getText();
         tableVIew.getItems().clear();
+        setMessage("");
         if( id_.equals("")){
             setMessage("ENTER APPOINTMENT ID");
             return;
@@ -178,7 +181,7 @@ public class AppointmentController implements Initializable {
         try{
             Connection connection= DriverManager.getConnection(url,username,Password);
             Statement statement=connection.createStatement();
-            String query=String.format("SELECT * FROM Appointment_Scheduler WHERE appointmentId=%d",id_);
+            String query=String.format("SELECT * FROM Appointment_Scheduler WHERE appointmentId=%d",Integer.parseInt(id_));
             ResultSet resultSet=statement.executeQuery(query);
 
             if(resultSet.next()){
@@ -188,6 +191,7 @@ public class AppointmentController implements Initializable {
                 String date=resultSet.getString("appointmentDate");
 
                 tableVIew.getItems().add(new Appointment_Scheduler(id,date,doctor,name));
+//                System.out.println("fount");
             }
             else{
                 setMessage("NO APPOINTMENT FOUND");
