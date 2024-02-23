@@ -30,6 +30,7 @@ public class AppointmentController implements Initializable {
     public TextField doctor;
     public Label message;
     public DatePicker date;
+    public TextField id;
 
     ObservableList<Appointment_Scheduler> list= FXCollections.observableArrayList();
 
@@ -73,10 +74,11 @@ public class AppointmentController implements Initializable {
             String query=String.format("INSERT INTO Appointment_Scheduler(appointmentDate,patientName,doctor)VALUES ('%s','%s','%s')",date_,name_,doctor_);
             int rowsAffected=statement.executeUpdate(query);
             if(rowsAffected>0){
-                setMessage("Appointment Booked Successfully");
+                setMessage("APPOINTMENT BOOKED SUCCESSFULLY");
+                fetchAllData();
             }
             else{
-                setMessage("Failed to Book Appointment");
+                setMessage("FAILED TO BOOK APPOINTMENT");
             }
 
         }
@@ -93,9 +95,10 @@ public class AppointmentController implements Initializable {
         String date_=date.getValue().toString();
         String doctor_=doctor.getText();
         String name_= patientName.getText();
+        String id_=id.getText();
 
-        if( doctor_.equals("") || name_.equals("")){
-            setMessage("ENTER APPOINTMENT DATE,DOCTOR,PATIENT NAME");
+        if( doctor_.equals("") || name_.equals("") || id_.equals("")){
+            setMessage("ENTER APPOINTMENT DATE,DOCTOR,PATIENT NAME AND ID");
             return;
         }
         try{
@@ -108,13 +111,14 @@ public class AppointmentController implements Initializable {
         try{
             Connection connection= DriverManager.getConnection(url,username,Password);
             Statement statement=connection.createStatement();
-            String query=String.format("INSERT INTO Appointment_Scheduler(appointmentDate,patientName,doctor)VALUES ('%s','%s','%s')",date_,name_,doctor_);
+            String query=String.format("UPDATE Appointment_Scheduler SET appointmentDate='%s',patientName='%s',doctor='%s' WHERE appointmentId=%d",date_,name_,doctor_,Integer.parseInt(id_));
             int rowsAffected=statement.executeUpdate(query);
             if(rowsAffected>0){
-                setMessage("Appointment Booked Successfully");
+                setMessage("APPOINTMENT UPDATED SUCCESSFULLY");
+                fetchAllData();
             }
             else{
-                setMessage("Failed to Book Appointment");
+                setMessage("FAILED TO UPDATE APPOINMENT");
             }
 
         }
@@ -124,9 +128,78 @@ public class AppointmentController implements Initializable {
     }
 
     public void deleteAppointment(MouseEvent mouseEvent) {
+
+        String id_=id.getText();
+
+        if( id_.equals("")){
+            setMessage("ENTER APPOINTMENT ID");
+            return;
+        }
+        try{
+            Class.forName("com.cj.mysql.jdbc.Driver");
+        }
+        catch(ClassNotFoundException e){
+//            System.out.println(e.getMessage());
+        }
+
+        try{
+            Connection connection= DriverManager.getConnection(url,username,Password);
+            Statement statement=connection.createStatement();
+            String query=String.format("DELETE FROM appointment_scheduler WHERE appointmentId=%d",Integer.parseInt(id_));
+            int rowsAffected=statement.executeUpdate(query);
+            if(rowsAffected>0){
+                setMessage("APPOINTMENT DELETED SUCCESSFULLY");
+                fetchAllData();
+            }
+            else{
+                setMessage("FAILED TO DELETE APPOINMENT");
+            }
+
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void getAppointmentDetails(MouseEvent mouseEvent) {
+        String id_=id.getText();
+        tableVIew.getItems().clear();
+        if( id_.equals("")){
+            setMessage("ENTER APPOINTMENT ID");
+            return;
+        }
+        try{
+            Class.forName("com.cj.mysql.jdbc.Driver");
+        }
+        catch(ClassNotFoundException e){
+//            System.out.println(e.getMessage());
+        }
+
+        try{
+            Connection connection= DriverManager.getConnection(url,username,Password);
+            Statement statement=connection.createStatement();
+            String query=String.format("SELECT * FROM Appointment_Scheduler WHERE appointmentId=%d",id_);
+            ResultSet resultSet=statement.executeQuery(query);
+
+            if(resultSet.next()){
+                int id=resultSet.getInt("appointmentId");
+                String name=resultSet.getString("patientName");
+                String doctor=resultSet.getString("doctor");
+                String date=resultSet.getString("appointmentDate");
+
+                tableVIew.getItems().add(new Appointment_Scheduler(id,date,doctor,name));
+            }
+            else{
+                setMessage("NO APPOINTMENT FOUND");
+            }
+
+
+
+
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void getAllAppointments(MouseEvent mouseEvent) {
