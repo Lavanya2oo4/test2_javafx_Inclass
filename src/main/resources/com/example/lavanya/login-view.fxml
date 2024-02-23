@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lavanya.LoginController">
+   <children>
+      <Label alignment="CENTER" layoutX="-1.0" prefHeight="56.0" prefWidth="600.0" style="-fx-background-color: pink; -fx-padding: 5px;" text="APPOINTMENT SCHEDULER">
+         <font>
+            <Font name="Century" size="32.0" />
+         </font>
+      </Label>
+      <Separator layoutX="8.0" layoutY="65.0" prefHeight="0.0" prefWidth="584.0" />
+      <Label layoutX="100.0" layoutY="94.0" text="MEMBER ID:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="128.0" layoutY="143.0" text="NAME:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="128.0" layoutY="192.0" text="EMAIL:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="100.0" layoutY="247.0" text="PASSWORD:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="memberId" layoutX="186.0" layoutY="92.0" prefHeight="25.0" prefWidth="277.0" promptText="ENTER MEMBER ID" />
+      <TextField fx:id="memberName" layoutX="186.0" layoutY="141.0" prefHeight="25.0" prefWidth="277.0" promptText="ENTER MEMBER NAME" />
+      <TextField fx:id="memberEmail" layoutX="186.0" layoutY="190.0" prefHeight="25.0" prefWidth="277.0" promptText="ENTER EMAIL" />
+      <PasswordField fx:id="memberPassword" layoutX="186.0" layoutY="245.0" prefHeight="25.0" prefWidth="277.0" promptText="*********" />
+      <Button layoutX="418.0" layoutY="295.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="129.0" style="-fx-background-color: pink;" text="LOGIN">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="message" alignment="CENTER" layoutX="14.0" layoutY="369.0" prefHeight="25.0" prefWidth="578.0" textFill="#f40505" />
+      <Separator layoutX="14.0" layoutY="353.0" prefHeight="9.0" prefWidth="578.0" />
+   </children>
+</Pane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lavanya.AppointmentController">
+   <children>
+      <TableView fx:id="tableVIew" layoutX="335.0" prefHeight="400.0" prefWidth="367.0">
+        <columns>
+          <TableColumn fx:id="tableId" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="tableName" prefWidth="75.0" text="Patient " />
+            <TableColumn fx:id="tabledate" prefWidth="90.39999389648438" text="Date" />
+            <TableColumn fx:id="tabledoctor" prefWidth="126.4000244140625" text="Doctor" />
+        </columns>
+      </TableView>
+      <Label layoutX="81.0" layoutY="49.0" text="Patient Name:" />
+      <Label layoutX="58.0" layoutY="89.0" text="AppointmentDate:" />
+      <Label layoutX="112.0" layoutY="131.0" text="Doctor:" />
+      <Button layoutX="151.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#bookAppointment" text="BOOK APPOINTEMENT" />
+      <Button layoutX="148.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#updateAppointment" text="UPDATE APPOINTMENT" />
+      <Button layoutX="150.0" layoutY="242.0" mnemonicParsing="false" onMouseClicked="#deleteAppointment" text="DELETE APPOINTMENT" />
+      <Button layoutX="148.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#getAppointmentDetails" text="GET APPOINTMENT DETAILS" />
+      <Button layoutX="147.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#getAllAppointments" prefHeight="26.0" prefWidth="168.0" text="GET ALL APPOINTMENTS" />
+      <TextField fx:id="patientName" layoutX="156.0" layoutY="45.0" />
+      <TextField fx:id="doctor" layoutX="157.0" layoutY="127.0" />
+      <Label fx:id="message" layoutX="20.0" layoutY="370.0" prefHeight="18.0" prefWidth="298.0" textFill="#dc0b0b" />
+      <Label alignment="CENTER" layoutX="20.0" layoutY="6.0" prefHeight="26.0" prefWidth="298.0" text="APPOINTMENT SCHEDULER" textFill="#8d05e1">
+         <font>
+            <Font name="Consolas Bold" size="22.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
