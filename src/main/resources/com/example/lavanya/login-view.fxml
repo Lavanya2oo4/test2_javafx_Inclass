@@ -42,7 +42,7 @@
       <TextField fx:id="memberName" layoutX="186.0" layoutY="141.0" prefHeight="25.0" prefWidth="277.0" promptText="ENTER MEMBER NAME" />
       <TextField fx:id="memberEmail" layoutX="186.0" layoutY="190.0" prefHeight="25.0" prefWidth="277.0" promptText="ENTER EMAIL" />
       <PasswordField fx:id="memberPassword" layoutX="186.0" layoutY="245.0" prefHeight="25.0" prefWidth="277.0" promptText="*********" />
-      <Button layoutX="418.0" layoutY="295.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="129.0" style="-fx-background-color: pink;" text="LOGIN">
+      <Button layoutX="418.0" layoutY="295.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="129.0" style="-fx-background-color: pink;" text="LOGIN" onMouseClicked="#Login">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
